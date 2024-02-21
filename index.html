@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Day of the Week Display with Animated, Pale Background</title>
+<style>
+  @keyframes rainbow-color {
+    0% {background-color: #ffcccc;} /* Light red */
+    14% {background-color: #ffdbac;} /* Light orange */
+    28% {background-color: #ffff99;} /* Light yellow */
+    42% {background-color: #ccffcc;} /* Light green */
+    57% {background-color: #ccccff;} /* Light blue */
+    71% {background-color: #e0ccff;} /* Light indigo */
+    85% {background-color: #f4ccff;} /* Light violet */
+    100% {background-color: #ffcccc;} /* Light red */
+  }
+
+  body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rainbow-color 10s infinite linear;
+  }
+
+  .day-container {
+    font-size: 10vw; /* Adjust based on the viewport width */
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: white;
+    text-shadow: 
+      -1px -1px 0 #000,  
+       1px -1px 0 #000,
+      -1px  1px 0 #000,
+       1px  1px 0 #000; /* Black border effect */
+  }
+</style>
+</head>
+<body>
+
+<div id="day" class="day-container"></div>
+
+<script>
+  function displayDayOfWeek() {
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const now = new Date();
+    const day = days[now.getDay()];
+    document.getElementById("day").innerText = day;
+  }
+
+  // Call the function when the page loads
+  window.onload = displayDayOfWeek;
+</script>
+
+</body>
+</html>
