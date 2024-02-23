@@ -3,42 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Day of the Week Display with Animated, Pale Background</title>
+<title>Day of the Week Display with Theme Adaptive Background</title>
 <style>
-  @keyframes rainbow-color {
-    0% {background-color: #ffcccc;} /* Light red */
+  html {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Ensure it covers the full height of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 1s; /* Smooth transition for background color change */
+  }
+
+  /* Define a base light theme that will be overridden by dark theme when active */
+  body {
+    background-color: #ffcccc; /* Light red by default */
+    animation: light-theme-color 10s infinite linear;
+  }
+
+  /* Define a dark theme that overrides the light one */
+  .dark-theme {
+    background-color: #2e2e2e; /* Dark grey by default */
+    animation: dark-theme-color 10s infinite linear;
+  }
+
+  .day-container {
+    font-size: 10vw;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    color: white; /* White text by default */
+    text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
+  }
+
+  /* Animations for light and dark themes */
+  @keyframes light-theme-color {
+    0%, 100% {background-color: #ffcccc;} /* Light red */
     14% {background-color: #ffdbac;} /* Light orange */
     28% {background-color: #ffff99;} /* Light yellow */
     42% {background-color: #ccffcc;} /* Light green */
     57% {background-color: #ccccff;} /* Light blue */
     71% {background-color: #e0ccff;} /* Light indigo */
     85% {background-color: #f4ccff;} /* Light violet */
-    100% {background-color: #ffcccc;} /* Light red */
+    /* Define color changes for light theme */
   }
-
-  body, html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: rainbow-color 10s infinite linear;
-  }
-
-  .day-container {
-    font-size: 10vw; /* Adjust based on the viewport width */
-    font-family: 'Arial', sans-serif;
-    font-weight: bold;
-    color: white;
-    text-shadow: 
-      -2px -2px 0 #000,  
-       2px -2px 0 #000,
-      -2px  2px 0 #000,
-       2px  2px 0 #000, /* Direct shadows for thickness */
-      -3px  0   0 #000,  
-       3px  0   0 #000,
-       0   -3px 0 #000,
-       0    3px 0 #000; /* Additional shadows for even thicker outline */
+  @keyframes dark-theme-color {
+    42% {background-color: #3d5c3d;} /* Dark green */
+    57% {background-color: #37375c;} /* Dark blue */
+    71% {background-color: #473d5c;} /* Dark indigo */
+    85% {background-color: #5c375c;} /* Dark violet */
   }
 </style>
 </head>
@@ -54,8 +69,16 @@
     document.getElementById("day").innerText = day;
   }
 
-  // Call the function when the page loads
-  window.onload = displayDayOfWeek;
+ // function applyThemeBasedOnTime() {
+    // For testing, you can directly assign the class to 'dark-theme'
+    // const theme = 'dark-theme'; // Force dark theme for testing
+    // document.body.className = theme;
+  // }
+
+  window.onload = function() {
+    displayDayOfWeek();
+    applyThemeBasedOnTime();
+  };
 </script>
 
 </body>
